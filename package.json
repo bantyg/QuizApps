@@ -12,9 +12,15 @@
     "debug": "~2.0.0",
     "express": "~4.9.0",
     "jade": "~1.6.0",
-    "mocha": "^2.1.0",
     "morgan": "~1.3.0",
     "serve-favicon": "~2.1.3",
-    "sqlite3": "^3.0.4"
+    "sqlite3": "^3.0.4",
+    "lodash":"*",
+    "mocha":"*",
+    "express-session":"*",
+    "bcryptjs":"*"
+  },
+  "devDependencies":{
+    "nodemon":"1.3.0-5"
   }
 }
