@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1= title
+  div.logout 
+   | Dashboard | Logout
+  p
+   h1(style="text-align:center") Available Quiz
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  div.showAvailableQuiz
+   if availableQuiz[0]
+    table(border="2px")
+      tr
+       th.showAvailableQuizTh Quiz
+       th.showAvailableQuizTh Total Time
+      each quiz,index in availableQuiz
+       tr
+        td
+         div.available
+          a(href="quiz/#{quiz.title}") #{quiz.title}
+        td
+         div.available
+          | #{quiz.timeOfQuiz}
+   p
+    h4
+     li Click on quiz to join
+   
+   if !availableQuiz[0]
+    h1 No quiz are available

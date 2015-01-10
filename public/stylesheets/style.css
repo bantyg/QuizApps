@@ -6,3 +6,34 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+th{
+	text-align: center;
+}
+td{
+	padding-right:20px;
+}
+
+.available{
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.logout{
+	/*border: solid black 2px;*/
+	float: right;
+}
+
+.showAvailableQuiz{
+	/*text-align: center;*/
+	margin-top: 10%;
+	margin-left: 30%;
+}
+
+.showAvailableQuizTh{
+	background:#E4E4E3;
+}
+
