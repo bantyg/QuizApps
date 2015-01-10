@@ -1,0 +1,27 @@
+extends layout
+block vars
+ - var title = "Dashboard"
+
+block content
+  h1 Welcome to your Dashboard
+  if topics!=undefined
+   #myTopics  
+    ul
+     each topic in topics
+      li 
+       a(href='/topic/#{topic.topic_id}_#{user_id}') #{topic.topic_name}
+  br
+  br
+  br
+  p
+   a(href="/createQuiz") Create New Quiz
+   |&nbsp
+   br
+   br
+   br
+   h1 OR
+   br 
+   br 
+   br
+   a(href="/availableQuiz") Show Available Quiz
+   |&nbsp
