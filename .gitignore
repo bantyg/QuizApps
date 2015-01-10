@@ -1,1 +1,4 @@
+test/data/adda.db
 node_modules/
+data/quiz.db
+test/data/quiz.db

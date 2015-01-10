@@ -1,0 +1,30 @@
+extends layout
+block vars
+ -var title = "create quiz"
+block content
+ h1 Create Quiz
+ form(action="/startQuiz"  method="post" enctype="multipart/form-data")
+  | Title Of Quiz:
+  input(type="text" name="title" required)
+  br
+  br
+  | No Of Players:
+  input(type="text" name="noOfPlayers" required)
+  br
+  br
+  | Upload Question:
+  input(type="file" name="nameOfFile" accept="json/*" required)
+  p(id = "uploadMsg") Upload message
+  br
+  | Total Time:
+  input(type="text" name="time" required)
+  br
+  br
+  | Coundown:
+  input(type="text" name="countdown" required)
+  br
+  br
+  input(type="submit" value="submit")
+  span
+  span 
+   button(type="button") Cancel

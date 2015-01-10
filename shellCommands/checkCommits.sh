@@ -9,7 +9,7 @@ do
 			echo -e '/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a Need to update'
 			sh shellCommands/pullCommit.sh
 		else
-			echo "No Update Available"
+			echo "Update-to-date"
 	fi
 	sleep 2m
 done
