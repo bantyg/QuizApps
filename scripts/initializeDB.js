@@ -12,8 +12,8 @@ var runAllQueries = function(){
 		});
 	};
 
-	[	"create table users(emailId text primary key, secret text not null);",
-
+	[	"create table users(id integer primary key autoincrement,"+
+			" name text, email text, password text);",
 		"create table quiz(id integer primary key autoincrement, title text not null,"+
 			" noOfPlayers integer, timeOfQuiz text not null, countDownTime text not null,"+
 			"questionReference text not null);"
