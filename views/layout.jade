@@ -1,7 +1,10 @@
+block vars
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Quiz #{title}
+    link(rel='stylesheet', href="/stylesheets/style.css")
+    block links
+    block scripts
   body
     block content

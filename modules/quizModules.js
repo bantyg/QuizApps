@@ -1,4 +1,17 @@
 var sqlite3 = require("sqlite3").verbose();
+var _ = require("lodash");
+
+
+var _getEmailAndPassword = function(email,db, onComplete) {
+	var select_query = "select * from users where email = '"+email+"';";
+	db.get(select_query, function(err,userDetail){
+			if(!userDetail){
+				onComplete(null, null);
+				return;
+			}
+			onComplete(null,userDetail);
+	});
+};
 
 var _availableQuiz = function(db,onComplete){
 	var availableQuiz = "select title , timeOfquiz from quiz";
@@ -27,6 +40,7 @@ var init = function(location){
 
 	var records = {		
 		getAvailableQuiz:operate(_availableQuiz),
+		getEmailAndPassword : operate(_getEmailAndPassword)
 	};
 	return records;
 };

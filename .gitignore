@@ -1,1 +1,5 @@
 node_modules/
+data/adda.db
+modules/quizMudules.js
+test/data/adda.db
+test/data/adda.db.backup
