@@ -4,10 +4,21 @@ var fs = require('fs');
 var dbFileData = fs.readFileSync('test/data/quiz.db.backup');
 var quizModules;
 
-describe('quizModules', function() {
-	beforeEach(function() {
-		fs.writeFileSync('test/data/quiz.db', dbFileData);
+describe('quizModules',function(){
+	beforeEach(function(){
+		fs.writeFileSync('test/data/quiz.db',dbFileData);
 		quizModules = lib.init('test/data/quiz.db');
+	});
+
+	describe('#getavailable',function(){
+		var expected = [ { title: 'movies', timeOfQuiz: '00:10:00' } ];
+		it('retrieves available quizes',function(done){
+			quizModules.getAvailableQuiz(function(err,availableQuiz){
+				assert.notOk(err);
+				assert.deepEqual(availableQuiz, expected);
+				done();
+			});
+		});
 	});
 
 	describe('#getEmailAndPassword', function() {
@@ -27,8 +38,7 @@ describe('quizModules', function() {
 				assert.notOk(err);
 				assert.equal(users,undefined);
 				done();
-			});
-		});
+			})
+		})
 	});
-
 });

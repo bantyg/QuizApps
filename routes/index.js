@@ -1,5 +1,6 @@
 var express = require('express');
-var quizModules = require('../modules/quizModules').init('./data/quiz.db');
+
+var lib = require('../modules/quizModules').init('./data/quiz.db');
 var router = express.Router();
 var quiz_routes = require('../modules/quiz_routes');
 
@@ -19,7 +20,7 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
 	var email = req.body.email;
-  quizModules.getEmailAndPassword(email,function(err, user) {
+  lib.getEmailAndPassword(email,function(err, user) {
     if (user && req.body.password == user.password) {
       res.redirect('/dashboard/');
     } else
@@ -34,5 +35,12 @@ router.get('/dashboard', function(req, res) {
 });
 
 router.post('/startQuiz',quiz_routes.createQuiz);
+
+router.get('/availableQuiz',function(req,res){
+	lib.getAvailableQuiz(function(err,availableQuiz){
+		err && req.render('availableQuiz',{error:err})
+		!err && res.render('availableQuiz',{availableQuiz:availableQuiz});
+	})
+})
 
 module.exports = router;

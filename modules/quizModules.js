@@ -29,8 +29,8 @@ var _createQuiz = function(quizDetails,db,onComplete){
 	});
 };		
 
-var _getEmailAndPassword = function(email,db,onComplete) {
-	var select_query = "select * from users where email = '"+ email +"';";
+var _getEmailAndPassword = function(email,db, onComplete) {
+	var select_query = "select * from users where email = '"+email+"';";
 	db.get(select_query, function(err,userDetail){
 		if(!userDetail){
 			onComplete(null, null);
@@ -40,26 +40,32 @@ var _getEmailAndPassword = function(email,db,onComplete) {
 	});
 };
 
-var init = function(location) {
-	var operate = function(operation) {
-		return function() {
-			var onComplete = (arguments.length == 2) ? arguments[1] : arguments[0];
+var _getAvailableQuiz = function(db,onComplete){
+	var availableQuiz = "select title , timeOfquiz from quiz";
+	db.all(availableQuiz,function(err,quizs){
+		onComplete(null,quizs)
+	});
+};
+
+var init = function(location){	
+	var operate = function(operation){
+		return function(){
+			var onComplete = (arguments.length == 2)?arguments[1]:arguments[0];
 			var arg = (arguments.length == 2) && arguments[0];
-			var onDBOpen = function(err) {
-				if (err) {
-					onComplete(err);
-					return;
-				}
+
+			var onDBOpen = function(err){
+				if(err){onComplete(err);return;}
 				db.run("PRAGMA foreign_keys = 'ON';");
-				arg && operation(arg, db, onComplete);
-				arg || operation(db, onComplete);
+				arg && operation(arg,db,onComplete);
+				arg || operation(db,onComplete);
 				db.close();
 			};
-			var db = new sqlite3.Database(location, onDBOpen);
-		};
+			var db = new sqlite3.Database(location,onDBOpen);
+		};	
 	};
 	var records = {
 		createQuiz : operate(_createQuiz),
+		getAvailableQuiz:operate(_getAvailableQuiz),
 		getEmailAndPassword : operate(_getEmailAndPassword)
 	};
 	return records;
