@@ -41,4 +41,6 @@ describe('quizModules',function(){
 			})
 		})
 	});
+
+	// describe('#createQuiz',function)
 });

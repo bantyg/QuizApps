@@ -2,31 +2,37 @@ var sqlite3 = require("sqlite3").verbose();
 var _ = require("lodash");
 var fs = require("fs");
 
+var recordQuizData = function(quiz,db,onComplete){
+	db.run(quiz.insertQuery,function(err){
+		db.run(quiz.createQuestionTable,function(egr){
+			egr && console.log(egr);
+			quiz.questions.forEach(function(question,index){
+				var insertQuestions = "insert into "+quiz.tableName+"(question,answer)"+
+									"values ('"+question.Q+"','"+question.A+"');";
+				db.run(insertQuestions,function(eor){
+					if(index == quiz.questions.length-1)
+						onComplete(null);
+				});
+			});
+		});
+	});
+};
+
 var _createQuiz = function(quizDetails,db,onComplete){
 	var insertQuery = "insert into quiz(title,noOfPlayers,timeOfQuiz,countDownTime,questionReference)"+
 					"values ('"+quizDetails.title+"', '"+quizDetails.noOfPlayers+"', '"+quizDetails.time+"', '"
 					+quizDetails.countdown+"','"+quizDetails.files.nameOfFile.originalname+"');";
-	console.log('Details',quizDetails);
 
 	var questionFile = quizDetails.files.nameOfFile.name; 
 	var questions  = JSON.parse(fs.readFileSync('./tmp/'+questionFile,'utf-8'));
 	var tableName = quizDetails.files.nameOfFile.originalname.slice(0,quizDetails.files.nameOfFile.originalname.indexOf('.'));
 	var createQuestionTable = "create table "+tableName+"(id integer primary key autoincrement,"+
 							"question text not null,answer text not null)";
-
-	db.run(insertQuery,function(err){
-		db.run(createQuestionTable,function(egr){
-			egr && console.log(egr);
-			questions.forEach(function(question,index){
-				var insertQuestions = "insert into "+tableName+"(question,answer)"+
-									"values ('"+question.Q+"','"+question.A+"');";
-				db.run(insertQuestions,function(eor){
-					if(index == questions.length-1)
-						onComplete(null);
-				});
-			});
-		});
-	});
+	var quiz = { insertQuery : insertQuery,
+		createQuestionTable : createQuestionTable,
+		questions : questions, tableName : tableName };
+		
+	recordQuizData(quiz,db,onComplete);
 };		
 
 var _getEmailAndPassword = function(email,db, onComplete) {
