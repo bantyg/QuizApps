@@ -42,5 +42,36 @@ describe('quizModules',function(){
 		})
 	});
 
-	// describe('#createQuiz',function)
+	describe('#createQuiz',function(){
+		it("creates new quiz with given information", function(done){
+			var newQuiz = { 
+				title: 'cricket',
+				noOfPlayers: '11', time: '12:00',
+				countdown: '02:00',
+				files: {
+					nameOfFile: {
+						fieldname: 'nameOfFile',
+				        originalname: 'a.json',
+				        name: 'e76b03a3a36e7c59630aca97467fe527.json',
+				        encoding: '7bit',
+				        mimetype: 'application/octet-stream',
+				        path: 'tmp\\e76b03a3a36e7c59630aca97467fe527.json',
+				        extension: 'json',
+				        size: 87,
+				        truncated: false,
+				        buffer: null 
+				    }
+				}
+			};
+			quizModules.createQuiz(newQuiz, function(err){
+				assert.notOk(err);
+				quizModules.getAvailableQuiz(function(err,quiz){
+					assert.deepEqual(quiz, [{title:'movies',timeOfQuiz:'00:10:00'},
+						{title:'cricket',timeOfQuiz:'12:00'}
+						]);
+					done();
+				});
+			});
+		});
+	});
 });
