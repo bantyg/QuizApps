@@ -11,7 +11,7 @@ var recordQuizData = function(quiz,db,onComplete){
 									"values ('"+question.Q+"','"+question.A+"');";
 				db.run(insertQuestions,function(eor){
 					if(index == quiz.questions.length-1)
-						onComplete(null);
+						onComplete(eor);
 				});
 			});
 		});
@@ -19,19 +19,19 @@ var recordQuizData = function(quiz,db,onComplete){
 };
 
 var _createQuiz = function(quizDetails,db,onComplete){
+	console.log(quizDetails);
 	var insertQuery = "insert into quiz(title,noOfPlayers,timeOfQuiz,countDownTime,questionReference)"+
-					"values ('"+quizDetails.title+"', '"+quizDetails.noOfPlayers+"', '"+quizDetails.time+"', '"
-					+quizDetails.countdown+"','"+quizDetails.files.nameOfFile.originalname+"');";
+					"values ('"+quizDetails.title+"', '"+quizDetails.noOfPlayers+"', '"+quizDetails.time.join(':')+"', '"
+					+quizDetails.count.join(':')+"','"+quizDetails.files.nameOfFile.originalname+"');";
 
 	var questionFile = quizDetails.files.nameOfFile.name; 
 	var questions  = JSON.parse(fs.readFileSync('./tmp/'+questionFile,'utf-8'));
-	var tableName = quizDetails.files.nameOfFile.originalname.slice(0,quizDetails.files.nameOfFile.originalname.indexOf('.'));
+	var tableName = quizDetails.title + 'Questions';
 	var createQuestionTable = "create table "+tableName+"(id integer primary key autoincrement,"+
 							"question text not null,answer text not null)";
 	var quiz = { insertQuery : insertQuery,
 		createQuestionTable : createQuestionTable,
 		questions : questions, tableName : tableName };
-		
 	recordQuizData(quiz,db,onComplete);
 };		
 

@@ -3,7 +3,8 @@ extends layout
 block content
   h1= title
   div.logout 
-   | Dashboard | Logout
+   a(href="/dashboard") Dashboard 
+   | | Logout
   p
    h1(style="text-align:center") Available Quiz
   link(rel='stylesheet', href='/stylesheets/style.css')
@@ -21,9 +22,9 @@ block content
         td
          div.available
           | #{quiz.timeOfQuiz}
-   p
-    h4
-     li Click on quiz to join
+    p
+     h4
+      li Click on quiz to join
    
    if !availableQuiz[0]
     h1 No quiz are available

@@ -11,12 +11,12 @@ block content
   br
 
   | No Of Players:
-  input(type="text" name="noOfPlayers" required)
+  input(type="number" name="noOfPlayers" required)
   br
   br
 
   | Upload Question:
-  input(type="file" name="nameOfFile" accept="json/*" required)
+  input( id = "browseFile" type="file" name="nameOfFile"  required)
   p(id = "uploadMsg") Upload message
   
   | Total Time:
@@ -31,9 +31,9 @@ block content
 
   | Coundown:
   |  Minutes:
-  input(type="number" size="1" name="time" value='00' min='0' max='59' required)
+  input(type="number" size="1" name="count" value='00' min='0' max='59' required)
   | Seconds:
-  input(type="number" size="1" name="time" value='00' min='1' max='59' required)
+  input(type="number" size="1" name="count" value='00' min='0' max='59' required)
   br
   br
 
