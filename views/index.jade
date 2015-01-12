@@ -1,5 +1,12 @@
 extends layout
+block vars
+ - var title = 'Quiz'
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 
+   |Welcome to Quiz.
+  br
+  p
+   a(href="/login") Login
+   |&nbsp;to continue  
+   

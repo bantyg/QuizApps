@@ -36,4 +36,7 @@ td{
 .showAvailableQuizTh{
 	background:#E4E4E3;
 }
-
+#error{
+	color: red;
+	font-weight: bold;
+}

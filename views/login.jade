@@ -4,8 +4,6 @@ block vars
 block links
 block content
   h1 Login to your account
-  if error
-   p ERROR: #{error}
   form(action="/login" method="POST")
    table(cellpadding=5)
     tr
@@ -21,3 +19,5 @@ block content
    br
    br
    input(type="submit" value="Login")
+   if error
+    p(id="error") ERROR: #{error}

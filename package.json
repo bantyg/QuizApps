@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev_start":"nodemon ./bin/www",
+    "test": "mocha test/*test.js"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
-    "chai": "^1.10.0",
     "cookie-parser": "~1.3.3",
     "debug": "~2.0.0",
     "express": "~4.9.0",
@@ -16,12 +17,13 @@
     "serve-favicon": "~2.1.3",
     "sqlite3": "^3.0.4",
     "lodash":"*",
-    "mocha":"*",
     "express-session":"*",
     "bcryptjs":"*",
     "multer":"*"
   },
   "devDependencies":{
-    "nodemon":"1.3.0-5"
+    "nodemon":"1.3.0-5",
+    "chai": "^1.10.0",
+    "mocha":"*"
   }
 }

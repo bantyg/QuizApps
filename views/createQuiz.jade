@@ -3,28 +3,42 @@ block vars
  -var title = "create quiz"
 block content
  h1 Create Quiz
+ 
  form(action="/startQuiz"  method="post" enctype="multipart/form-data")
   | Title Of Quiz:
   input(type="text" name="title" required)
   br
   br
+
   | No Of Players:
   input(type="text" name="noOfPlayers" required)
   br
   br
+
   | Upload Question:
   input( id = "browseFile" type="file" name="nameOfFile"  required)
   p(id = "uploadMsg") Upload message
-  br
+  
   | Total Time:
-  input(type="text" name="time" required)
+  | Hours:
+  input(type="number" size="1" name="Time"  value='00' min="0" required)
+  |  Minutes:
+  input(type="number" size="1" name="time" value='01' min="1" max="59" required)
+  | Seconds:
+  input(type="number" size="1" name="time" value='00' min='0' max='59' required)
   br
   br
+
   | Coundown:
-  input(type="text" name="countdown" required)
+  |  Minutes:
+  input(type="number" size="1" name="time" value='00' min='0' max='59' required)
+  | Seconds:
+  input(type="number" size="1" name="time" value='00' min='1' max='59' required)
   br
   br
+
   input(type="submit" value="submit")
   span
   span 
-   button(type="button") Cancel
+   button(type="button" onclick="location.href='/dashboard'") Cancel
+   
