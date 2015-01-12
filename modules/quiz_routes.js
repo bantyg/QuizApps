@@ -4,7 +4,9 @@ var lib = require('../modules/quizModules').init('./data/quiz.db');
 exports.createQuiz = function(req,res){
 	req.body.files  = req.files;
 	quizModules.createQuiz(req.body,function(err){
-		res.render('startPage');
+    console.log(err)
+		err && res.render('createQuiz',{error:"something went wrong"})
+    !err && res.render('startPage');
 	});
 };
 

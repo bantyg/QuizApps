@@ -11,7 +11,7 @@ var recordQuizData = function(quiz,db,onComplete){
 									"values ('"+question.Q+"','"+question.A+"');";
 				db.run(insertQuestions,function(eor){
 					if(index == quiz.questions.length-1)
-						onComplete(null);
+						onComplete(eor);
 				});
 			});
 		});
@@ -31,7 +31,6 @@ var _createQuiz = function(quizDetails,db,onComplete){
 	var quiz = { insertQuery : insertQuery,
 		createQuestionTable : createQuestionTable,
 		questions : questions, tableName : tableName };
-		
 	recordQuizData(quiz,db,onComplete);
 };		
 
